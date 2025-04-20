@@ -1,0 +1,23 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 2,
+    "applicationType": "microservice",
+    "authenticationType": "oauth2",
+    "baseName": "suuku_invoice",
+    "buildTool": "maven",
+    "cacheProvider": "infinispan",
+    "entities": ["Invoice", "Shipment"],
+    "jhipsterVersion": "8.10.0",
+    "jwtSecretKey": "MGZhMWU2MDRmZjBjYzg1ZDg3Zjg0ZTk4NmVlMDgxNzIxYTI5YjE0NGUxYWNhYTdiZWI1ODFhNTFmYzI3MjBiY2JiZTEyODQyOThlNmQ5OWMxMGM5ZWE1MDVmZTA4NzE5YjI2OWJiMzY2ZjMwMTc4N2Q0OTc4NzAwYmFjYjU4Nzk=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1745143907000,
+    "nativeLanguage": "en",
+    "packageName": "net.suuku.invoice",
+    "prodDatabaseType": "postgresql",
+    "reactive": true,
+    "serverPort": "8082",
+    "serviceDiscoveryType": "no",
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
