@@ -2,6 +2,7 @@ package net.suuku.invoice.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import org.springframework.data.annotation.Id;
@@ -15,6 +16,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Shipment implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id

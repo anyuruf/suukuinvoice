@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class SpringDocConfiguration {
 
     @Bean
-    public ServerBaseUrlCustomizer serverBaseUrlRequestCustomizer() {
+    ServerBaseUrlCustomizer serverBaseUrlRequestCustomizer() {
         return (serverBaseUrl, request) -> {
             List<String> forwardedPrefix = request.getHeaders().get("X-Forwarded-Prefix");
             if (forwardedPrefix != null && forwardedPrefix.size() > 0) {

@@ -87,10 +87,8 @@ public class InvoiceResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/{id}")
-    public Mono<ResponseEntity<Invoice>> updateInvoice(
-        @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody Invoice invoice
-    ) throws URISyntaxException {
+    public Mono<ResponseEntity<Invoice>> updateInvoice(@PathVariable(required = false) final Long id, @Valid @RequestBody Invoice invoice)
+        throws URISyntaxException {
         LOG.debug("REST request to update Invoice : {}, {}", id, invoice);
         if (invoice.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -130,7 +128,7 @@ public class InvoiceResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public Mono<ResponseEntity<Invoice>> partialUpdateInvoice(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(required = false) final Long id,
         @NotNull @RequestBody Invoice invoice
     ) throws URISyntaxException {
         LOG.debug("REST request to partial update Invoice partially : {}, {}", id, invoice);
@@ -195,7 +193,7 @@ public class InvoiceResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the invoice, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public Mono<ResponseEntity<Invoice>> getInvoice(@PathVariable("id") Long id) {
+    public Mono<ResponseEntity<Invoice>> getInvoice(@PathVariable Long id) {
         LOG.debug("REST request to get Invoice : {}", id);
         Mono<Invoice> invoice = invoiceService.findOne(id);
         return ResponseUtil.wrapOrNotFound(invoice);
@@ -208,7 +206,7 @@ public class InvoiceResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public Mono<ResponseEntity<Void>> deleteInvoice(@PathVariable("id") Long id) {
+    public Mono<ResponseEntity<Void>> deleteInvoice(@PathVariable Long id) {
         LOG.debug("REST request to delete Invoice : {}", id);
         return invoiceService
             .delete(id)

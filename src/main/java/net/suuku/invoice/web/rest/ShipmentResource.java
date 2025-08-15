@@ -88,7 +88,7 @@ public class ShipmentResource {
      */
     @PutMapping("/{id}")
     public Mono<ResponseEntity<Shipment>> updateShipment(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(required = false) final Long id,
         @Valid @RequestBody Shipment shipment
     ) throws URISyntaxException {
         LOG.debug("REST request to update Shipment : {}, {}", id, shipment);
@@ -130,7 +130,7 @@ public class ShipmentResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public Mono<ResponseEntity<Shipment>> partialUpdateShipment(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(required = false) final Long id,
         @NotNull @RequestBody Shipment shipment
     ) throws URISyntaxException {
         LOG.debug("REST request to partial update Shipment partially : {}, {}", id, shipment);
@@ -172,7 +172,7 @@ public class ShipmentResource {
     public Mono<ResponseEntity<List<Shipment>>> getAllShipments(
         @org.springdoc.core.annotations.ParameterObject Pageable pageable,
         ServerHttpRequest request,
-        @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
+        @RequestParam(required = false, defaultValue = "true") boolean eagerload
     ) {
         LOG.debug("REST request to get a page of Shipments");
         return shipmentService
@@ -197,7 +197,7 @@ public class ShipmentResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the shipment, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public Mono<ResponseEntity<Shipment>> getShipment(@PathVariable("id") Long id) {
+    public Mono<ResponseEntity<Shipment>> getShipment(@PathVariable Long id) {
         LOG.debug("REST request to get Shipment : {}", id);
         Mono<Shipment> shipment = shipmentService.findOne(id);
         return ResponseUtil.wrapOrNotFound(shipment);
@@ -210,7 +210,7 @@ public class ShipmentResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public Mono<ResponseEntity<Void>> deleteShipment(@PathVariable("id") Long id) {
+    public Mono<ResponseEntity<Void>> deleteShipment(@PathVariable Long id) {
         LOG.debug("REST request to delete Shipment : {}", id);
         return shipmentService
             .delete(id)
