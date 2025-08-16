@@ -11,7 +11,7 @@
     -->
     <changeSet id="20250420101147-1" author="jhipster">
         <createTable tableName="shipment">
-            <column name="id" type="bigint" autoIncrement="true" startWith="1500">
+            <column name="id" type="bigint" autoIncrement="true" startWith="1535">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="tracking_code" type="varchar(255)">
@@ -49,7 +49,7 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="tracking_code" type="string"/>
-            <column name="date" type="date"/>
+            <column name="date" type="datetime"/>
             <column name="details" type="string"/>
             <column name="invoice_id" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
