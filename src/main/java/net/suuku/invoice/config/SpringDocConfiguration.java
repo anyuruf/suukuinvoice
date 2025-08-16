@@ -12,7 +12,7 @@ public class SpringDocConfiguration {
     ServerBaseUrlCustomizer serverBaseUrlRequestCustomizer() {
         return (serverBaseUrl, request) -> {
             List<String> forwardedPrefix = request.getHeaders().get("X-Forwarded-Prefix");
-            if (forwardedPrefix != null && forwardedPrefix.size() > 0) {
+            if (forwardedPrefix != null && !forwardedPrefix.isEmpty()) {
                 return forwardedPrefix.get(0);
             }
             return serverBaseUrl;

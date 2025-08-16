@@ -226,7 +226,6 @@ class ShipmentResourceIT {
             .value(hasItem(DEFAULT_DETAILS));
     }
 
-    @SuppressWarnings({ "unchecked" })
     void getAllShipmentsWithEagerRelationshipsIsEnabled() {
         when(shipmentServiceMock.findAllWithEagerRelationships(any())).thenReturn(Flux.empty());
 
@@ -235,7 +234,6 @@ class ShipmentResourceIT {
         verify(shipmentServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
-    @SuppressWarnings({ "unchecked" })
     void getAllShipmentsWithEagerRelationshipsIsNotEnabled() {
         when(shipmentServiceMock.findAllWithEagerRelationships(any())).thenReturn(Flux.empty());
 

@@ -13,7 +13,6 @@ import org.springframework.data.relational.core.mapping.Table;
  * A Shipment.
  */
 @Table("shipment")
-@SuppressWarnings("common-java:DuplicatedBlocks")
 public class Shipment implements Serializable {
 
     @Serial
