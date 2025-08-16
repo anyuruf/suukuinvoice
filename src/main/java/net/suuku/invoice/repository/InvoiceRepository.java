@@ -10,7 +10,6 @@ import reactor.core.publisher.Mono;
 /**
  * Spring Data R2DBC repository for the Invoice entity.
  */
-@SuppressWarnings("unused")
 @Repository
 public interface InvoiceRepository extends ReactiveCrudRepository<Invoice, Long>, InvoiceRepositoryInternal {
     Flux<Invoice> findAllBy(Pageable pageable);

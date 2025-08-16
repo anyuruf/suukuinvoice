@@ -37,6 +37,7 @@ class InvoiceRepositoryInternalImpl extends SimpleR2dbcRepository<Invoice, Long>
 
     private static final Table entityTable = Table.aliased("invoice", EntityManager.ENTITY_ALIAS);
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public InvoiceRepositoryInternalImpl(
         R2dbcEntityTemplate template,
         EntityManager entityManager,
@@ -80,12 +81,6 @@ class InvoiceRepositoryInternalImpl extends SimpleR2dbcRepository<Invoice, Long>
     }
 
     private Invoice process(Row row, RowMetadata metadata) {
-        Invoice entity = invoiceMapper.apply(row, "e");
-        return entity;
-    }
-
-    @Override
-    public <S extends Invoice> Mono<S> save(S entity) {
-        return super.save(entity);
+        return invoiceMapper.apply(row, "e");
     }
 }

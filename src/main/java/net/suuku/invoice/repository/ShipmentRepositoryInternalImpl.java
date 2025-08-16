@@ -38,9 +38,11 @@ class ShipmentRepositoryInternalImpl extends SimpleR2dbcRepository<Shipment, Lon
     private final InvoiceRowMapper invoiceMapper;
     private final ShipmentRowMapper shipmentMapper;
 
+    private static final String INVOICE = "invoice";
     private static final Table entityTable = Table.aliased("shipment", EntityManager.ENTITY_ALIAS);
-    private static final Table invoiceTable = Table.aliased("invoice", "invoice");
+    private static final Table invoiceTable = Table.aliased(INVOICE, INVOICE);
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public ShipmentRepositoryInternalImpl(
         R2dbcEntityTemplate template,
         EntityManager entityManager,
@@ -68,12 +70,12 @@ class ShipmentRepositoryInternalImpl extends SimpleR2dbcRepository<Shipment, Lon
 
     RowsFetchSpec<Shipment> createQuery(Pageable pageable, Condition whereClause) {
         List<Expression> columns = ShipmentSqlHelper.getColumns(entityTable, EntityManager.ENTITY_ALIAS);
-        columns.addAll(InvoiceSqlHelper.getColumns(invoiceTable, "invoice"));
+        columns.addAll(InvoiceSqlHelper.getColumns(invoiceTable, INVOICE));
         SelectFromAndJoinCondition selectFrom = Select.builder()
             .select(columns)
             .from(entityTable)
             .leftOuterJoin(invoiceTable)
-            .on(Column.create("invoice_id", entityTable))
+            .on(Column.create(INVOICE, entityTable))
             .equals(Column.create("id", invoiceTable));
         // we do not support Criteria here for now as of https://github.com/jhipster/generator-jhipster/issues/18269
         String select = entityManager.createSelect(selectFrom, Shipment.class, pageable, whereClause);
@@ -110,10 +112,5 @@ class ShipmentRepositoryInternalImpl extends SimpleR2dbcRepository<Shipment, Lon
         Shipment entity = shipmentMapper.apply(row, "e");
         entity.setInvoice(invoiceMapper.apply(row, "invoice"));
         return entity;
-    }
-
-    @Override
-    public <S extends Shipment> Mono<S> save(S entity) {
-        return super.save(entity);
     }
 }
