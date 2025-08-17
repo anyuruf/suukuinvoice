@@ -20,7 +20,6 @@ import org.springframework.data.relational.core.mapping.Table;
  */
 @Schema(description = "Entities for Invoice microservice")
 @Table("invoice")
-@SuppressWarnings("common-java:DuplicatedBlocks")
 public class Invoice implements Serializable {
 
     @Serial

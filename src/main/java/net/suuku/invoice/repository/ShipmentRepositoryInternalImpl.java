@@ -38,9 +38,10 @@ class ShipmentRepositoryInternalImpl extends SimpleR2dbcRepository<Shipment, Lon
     private final InvoiceRowMapper invoiceMapper;
     private final ShipmentRowMapper shipmentMapper;
 
-    private static final String INVOICE = "invoice";
+    private static final String INVOICE_ALIAS = "invoice";
+    private static final String INVOICE_ID = "invoice_id";
     private static final Table entityTable = Table.aliased("shipment", EntityManager.ENTITY_ALIAS);
-    private static final Table invoiceTable = Table.aliased(INVOICE, INVOICE);
+    private static final Table invoiceTable = Table.aliased(INVOICE_ALIAS, INVOICE_ALIAS);
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public ShipmentRepositoryInternalImpl(
@@ -70,12 +71,12 @@ class ShipmentRepositoryInternalImpl extends SimpleR2dbcRepository<Shipment, Lon
 
     RowsFetchSpec<Shipment> createQuery(Pageable pageable, Condition whereClause) {
         List<Expression> columns = ShipmentSqlHelper.getColumns(entityTable, EntityManager.ENTITY_ALIAS);
-        columns.addAll(InvoiceSqlHelper.getColumns(invoiceTable, INVOICE));
+        columns.addAll(InvoiceSqlHelper.getColumns(invoiceTable, INVOICE_ALIAS));
         SelectFromAndJoinCondition selectFrom = Select.builder()
             .select(columns)
             .from(entityTable)
             .leftOuterJoin(invoiceTable)
-            .on(Column.create(INVOICE, entityTable))
+            .on(Column.create(INVOICE_ID, entityTable))
             .equals(Column.create("id", invoiceTable));
         // we do not support Criteria here for now as of https://github.com/jhipster/generator-jhipster/issues/18269
         String select = entityManager.createSelect(selectFrom, Shipment.class, pageable, whereClause);
@@ -84,7 +85,7 @@ class ShipmentRepositoryInternalImpl extends SimpleR2dbcRepository<Shipment, Lon
 
     @Override
     public Flux<Shipment> findAll() {
-        return findAllBy(null);
+        return createQuery(null, null).all();
     }
 
     @Override
@@ -110,7 +111,7 @@ class ShipmentRepositoryInternalImpl extends SimpleR2dbcRepository<Shipment, Lon
 
     private Shipment process(Row row, RowMetadata metadata) {
         Shipment entity = shipmentMapper.apply(row, "e");
-        entity.setInvoice(invoiceMapper.apply(row, "invoice"));
+        entity.setInvoice(invoiceMapper.apply(row, INVOICE_ALIAS));
         return entity;
     }
 }
