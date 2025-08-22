@@ -33,7 +33,7 @@ public class PostgreSqlTestContainer implements SqlTestContainer {
                 .withTmpFs(Collections.singletonMap("/testtmpfs", "rw"))
                 .withLogConsumer(new Slf4jLogConsumer(LOG))
                 .withReuse(true)
-                .waitingFor(Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(30)));
+                .withInitScript("init-schema.sql");
         }
         if (!postgreSQLContainer.isRunning()) {
             postgreSQLContainer.start();

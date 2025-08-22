@@ -10,7 +10,7 @@
         Added the entity Shipment.
     -->
     <changeSet id="20250420101147-1" author="jhipster">
-        <createTable tableName="shipment">
+        <createTable tableName="shipment" schemaName="suuku_domain">
             <column name="id" type="bigint" autoIncrement="true" startWith="1535">
                 <constraints primaryKey="true" nullable="false"/>
             </column>

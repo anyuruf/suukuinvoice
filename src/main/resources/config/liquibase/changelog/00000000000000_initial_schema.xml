@@ -10,11 +10,13 @@
         JHipster core tables.
         The initial schema has the '00000000000001' id, so that it is over-written if we re-generate it.
     -->
-    <changeSet id="00000000000001" author="jhipster">
-    </changeSet>
+    <changeSet id="00000000000001" author="anyuruf">
+	</changeSet>
 
-    <changeSet author="jhipster" id="00000000000002" context="test">
-        <createTable tableName="jhi_date_time_wrapper">
+
+
+    <changeSet author="jhipster" id="00000000000002"  context="test">
+        <createTable tableName="jhi_date_time_wrapper" schemaName="suuku_domain">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="jhi_date_time_wrapperPK"/>
             </column>

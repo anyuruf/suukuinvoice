@@ -10,7 +10,7 @@
         Added the entity Invoice.
     -->
     <changeSet id="20250420101047-1" author="jhipster">
-        <createTable tableName="invoice" remarks="Entities for Invoice microservice">
+        <createTable tableName="invoice" schemaName="suuku_domain" remarks="Entities for Invoice microservice">
             <column name="id" type="bigint" autoIncrement="true" startWith="1535">
                 <constraints primaryKey="true" nullable="false"/>
             </column>

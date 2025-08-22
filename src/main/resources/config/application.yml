@@ -53,7 +53,7 @@ management:
           - liquibase
   endpoint:
     health:
-      show-details: when_authorized
+      show-details: WHEN_AUTHORIZED
       roles: 'ROLE_ADMIN'
       probes:
         enabled: true
@@ -63,7 +63,7 @@ management:
         readiness:
           include: readinessState
     jhimetrics:
-      enabled: true
+      access: READ_ONLY
   info:
     git:
       mode: full
@@ -127,11 +127,11 @@ spring:
       client:
         provider:
           oidc:
-            issuer-uri: http://suuku-keycloak:9080/realms/jhipster
+            issuer-uri: ${SUUKU_KEYCLOAK_ISSUER_URI}
         registration:
           oidc:
-            client-id: internal
-            client-secret: internal
+            client-id: ${SUUKU_KEYCLOAK_APP_CLIENT}
+            client-secret: ${SUUKU_KEYCLOAK_APP_CLIENT_SECRET}
             scope: openid, profile, email, offline_access # last one for refresh tokens
   task:
     execution:
