@@ -55,11 +55,10 @@
         <loadData
                   file="config/liquibase/fake-data/invoice.csv"
                   separator=";"
-                  tableName="invoice"
-                  usePreparedStatements="true">
+                  tableName="invoice">
             <column name="id" type="numeric"/>
             <column name="code" type="string"/>
-            <column name="date" type="datetime"/>
+            <column name="date" type="timestamptz"/>
             <column name="details" type="string"/>
             <column name="status" type="string"/>
             <column name="payment_method" type="string"/>
