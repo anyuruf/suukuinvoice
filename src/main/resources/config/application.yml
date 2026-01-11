@@ -130,9 +130,9 @@ spring:
             issuer-uri: ${SUUKU_KEYCLOAK_ISSUER_URI}
         registration:
           oidc:
-            client-id: ${SUUKU_KEYCLOAK_APP_CLIENT}
-            client-secret: ${SUUKU_KEYCLOAK_APP_CLIENT_SECRET}
-            scope: openid, profile, email, offline_access # last one for refresh tokens
+            client-id: internal
+            client-secret: internal
+            scope: openid,profile,email # last one for refresh tokens
   task:
     execution:
       thread-name-prefix: suuku-invoice-task-
